@@ -181,7 +181,11 @@ static CGSize AssetGridThumbnailSize;
         yOffset = self.view.tz_height - 50 - navigationHeight;
     }
     
-    UIView *bottomToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, yOffset, self.view.tz_width, 50)];
+    CGFloat bottomMargin = 0;
+    if (@available(iOS 11.0, *)) {
+        bottomMargin = [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+    }
+    UIView *bottomToolBar = [[UIView alloc] initWithFrame:CGRectMake(0, yOffset - bottomMargin, self.view.tz_width, 50)];
     CGFloat rgb = 253 / 255.0;
     bottomToolBar.backgroundColor = [UIColor colorWithRed:rgb green:rgb blue:rgb alpha:1.0];
     
